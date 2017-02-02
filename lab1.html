@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0040)file:///tmp/mu-1000/52078ee3/2/lab1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>CSCI 136 Lab 1</title>
+    <meta content="Subash Shankar" name="author">
+  </head>
+  <body>
+    <h1 align="center">Lab 1 - Introduction to Linux and C++<br>
+    </h1>
+    <h3>Due: end of class</h3>
+    <h3>Review</h3>
+    <p>Recall that the Linux file system is tree-structured, with files
+      and directories. <br>
+    </p>
+    <p>Some useful linux/unix CLI (command line interface) commands are:
+    </p>
+    <ol>
+    </ol>
+    <ul>
+      <li> man &lt;command&gt;: description of command, including all
+        its options</li>
+      <li>ls: list files in current directory. <br>
+      </li>
+      <li>pwd: print working directory (i.e., current directory)<br>
+      </li>
+      <li>cd &lt;dir&gt;: change directory. Some useful values of
+        &lt;dir&gt; include . (current), .. (parent), / (root of file
+        system), and ~ (home)</li>
+      <li>mkdir &lt;dir&gt;: make a directory in your current working
+        directory</li>
+    </ul>
+    <p>If you need a refresher, there is a simple tutorial <a href="http://www.ee.surrey.ac.uk/Teaching/Unix/unix1.html">here.
+      </a><br>
+    </p>
+    <p>Also recall that some standard editors for Linux include gedit,
+      emacs, and vim. You may use any of these, though emacs and vim are
+      most common in the CS world. <br>
+    </p>
+    <h3>Task 0<br>
+    </h3>
+    <p>To avoid cluttering your home directory, create a directory
+      titled lab1. The instructor's home directory contains a small
+      program whose name starts with "." and ends with "1a.cpp". If you
+      don't know how to find the file, use man to find the proper ls
+      option (and/or use wildcards). Find this file, copy it to
+      ~/lab1/lab1a.cpp, compile (using g++ -o lab1a lab1a.cpp), and run
+      it (./lab1a). What does it output? <br>
+    </p>
+    <p>One problem with the program is that it does not output a
+      carriage return (so, the prompt for the next command is on the
+      same line). Edit the program to add your instructor's name at the
+      end of the output, and also fix the above problem. Rerun. <br>
+    </p>
+    <h3>Task 1<br>
+    </h3>
+    <p>Write a program in ~/lab1/lab1b.cpp that outputs "Good morning
+      &lt;instructor&gt;.", "Good afternoon &lt;instructor&gt;.", or
+      "Good evening &lt;instructor&gt;." depending on whether the
+      current time is midnight-noon, noon-sunset, or sunset-midnight
+      respectively.&nbsp; <br>
+    </p>
+    <p>Your program should first prompt the user for the sunset time
+      with the following prompts, inputting data using cin (e.g., "cin
+      &gt;&gt; cur_hour") after each prompt:<br>
+    </p>
+    <blockquote><tt>Enter the hours part of today's sunset time (4-9):<br>
+        Enter the minutes part of today's sunset time (0-59):<br>
+      </tt></blockquote>
+    <p> </p>
+    For this assignment, you may assume that the user enters a legal
+    value, and you should not do any error checking (since this is just
+    the first day of class!). These values obviously won't work in the
+    Arctic, but we won't worry about that either. <br>
+    <p>You will also need to retrieve the current time (24 hour format).
+      A standard platform-independent way to do this is through the
+      ctime library. Since you have not covered enough C/C++ to use this
+      yet, you can just cut/paste the following sequence to get the
+      current hour/min:<font size="+1"><tt><br>
+          &nbsp;&nbsp; time_t t;</tt><tt><br>
+        </tt><tt>&nbsp;&nbsp; struct tm *now;<br>
+        </tt><tt> </tt><tt>&nbsp;&nbsp; t = time(0); &nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; // get current
+          time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </tt><tt><br>
+        </tt><tt>&nbsp;&nbsp; now =
+          localtime(&amp;t);&nbsp;&nbsp;&nbsp;&nbsp; // adjust for local
+          timezone</tt><tt><br>
+        </tt><tt>&nbsp;&nbsp; int hour = now-&gt;tm_hour; // retrieve
+          current hour<br>
+          &nbsp;&nbsp; int min = now-&gt;tm_min;&nbsp;&nbsp; // retrieve
+          current min<br>
+        </tt></font></p>
+    <p>You will also need to include the ctime library (#include
+      &lt;ctime&gt; at the top of your file).<br>
+    </p>
+    <p>In your submitted program, you should also state the test cases
+      you tried, and why you picked those. Write these in <i>brief</i>
+      comments. <br>
+    </p>
+    <h3>Task 2<br>
+    </h3>
+    <p>Modify the above program as follow:<br>
+    </p>
+    <ul>
+      <li>Add a prompt asking "How many minutes from now do you expect
+        to be home?", and output a sentence saying "You will get home at
+        HH:MM".</li>
+    </ul>
+    <h3>SUBMISSION</h3>
+    <p>Your instructor will give you directions on how to submit the
+      program.<br>
+    </p>
+    <p>You should have the following header on all programs this
+      semester:<br>
+    </p>
+    <blockquote><font size="+1"><tt>/*<br>
+          &nbsp; Author: &lt;name&gt;<br>
+          &nbsp; Course: {135,136}<br>
+          &nbsp; Instructor: &lt;name&gt;<br>
+          &nbsp; Assignment: &lt;title, e.g., "Lab 1"&gt;<br>
+          <br>
+          &nbsp; This program does ...<br>
+          */<br>
+        </tt></font><font size="+1"><br>
+      </font></blockquote>
+    <h3> </h3>
+    <h3>GRADING</h3>
+    <p>All 135 and 136 programs this semester will be graded on: </p>
+    <ul>
+      <li> Correctness: Does your program work? <br>
+      </li>
+      <li>Testing: Have you generated sufficient and good test data to
+        give reasonable confidence that your program works?</li>
+      <li>Structure: Have you structured your code to follow proper
+        software engineering guidelines? This includes readability and
+        maintainability. Note that <br>
+      </li>
+      <li>Documentation: How well documented is your code? Good
+        documentation does not repeat the code in English, but explains
+        the point of each code block, highlighting any design decisions
+        and/or tricky implementation details. </li>
+    </ul>
+    <p><br>
+    </p>
+    <ol>
+    </ol>
+  
+
+</body></html>
