@@ -59,6 +59,24 @@ string tri1(int side)
 	return s;
 }
 
+
+string trap(int h, int b)
+{
+	string s;
+	for (int i = 0; i < h; i++)
+	{
+		for (int k = 0; k <= b-h; k++)
+			{
+				s+="*";
+			}
+			s+="\n";
+			b = b + 1;
+	}
+	return s;
+}
+
+
+/*
 string trap(int side, int height)//basically a trianggle with top cut off
 {
 
@@ -70,6 +88,8 @@ string trap(int side, int height)//basically a trianggle with top cut off
 	return s;
 
 }
+*/
+
 
 string tri2(int side) // upper half of square
 {
@@ -147,7 +167,7 @@ cout<<rect(10,11)<<endl;
 cout<<"===============TRI2================"<<endl;
 cout<<tri1(12)<<endl;
 cout<<"===============TRAP================"<<endl;
-cout<<trap(12,12)<<endl;
+cout<<trap(12,15)<<endl;
 cout<<"===============TRI2================"<<endl;
 cout<<tri2(12)<<endl;
 cout<<"===============CIRCLE================"<<endl;
