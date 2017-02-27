@@ -1,0 +1,18 @@
+
+| Category               | Score | Notes |
+|------------------------+-------+-------|
+| Correctness  (40)      |    40 |       |
+| Input Validation (10)  |    10 |       |
+|------------------------+-------+-------|
+| Testing (15)           |    15 |       |
+| Analysis - part 2 (15) |    15 |       |
+| Structure (10)         |    10 |       |
+| Documentation  (10)    |     7 |       |
+|------------------------+-------+-------|
+| Total                  |    97 |       |
+#+TBLFM: @>$2=vsum(@2..@-1)
+
+Nice job but you didn't give me the easy/hard part in the readme file
+
+Please rename (and push to github) the Lab1 repo to Lab_01
+
