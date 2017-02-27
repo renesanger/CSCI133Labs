@@ -1,25 +1,6 @@
 #include <iostream>
+#include "verhulst.h"
 using namespace std;
-
-/*
-  Author: Rene Sanger
-  Course: {135,136}
-  Instructor: Mike Zamansky
-  Assignment: "Lab 2"
-
-  This program does ...
-	automatiically calls verhulst 3 times 
-	
-	it gets inputs that become the values for population, growth rate, minimum loss rate,carrying capacity, table size
-	generates a table with population corresponding to the year
-	
-*/
-
-//calculates the population of the next year 
-float verhulst(int p, float g, float h, int m)
-{
-	return ((1+g-h)*p)-(g*p*p/m);
-}
 
 int main()
 {
