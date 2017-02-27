@@ -28,8 +28,6 @@ for(int i=n-k;i>1;i--)
 total=x/(y*z);
 	return total;
 
-
-
 }
 
 
@@ -46,7 +44,6 @@ int C2(int n, int k)
 	total= x/y;
 	return total;
 }
-
 
 double C3(int n, int k)
 {
@@ -74,24 +71,32 @@ double C3(int n, int k)
 double c4(int n, int k)
 {
 	double div;
-	double total;
+	double total=1;
 
-	for(int i=1;i<k;i++)
+	for(double i=1;i<=k;i++)
 	{
-		div=1+(n-k)/i;
-		total*=div;
+		total*=(1+(n-k)/i);
 	}
 	return total;
-
-
 }
 
 int main()
 {
-	cout<<C(5,2)<<endl;
+	cout<<C(5,4)<<endl;
 	cout<<C2(5,2)<<endl;
 	cout<<C3(5,3)<<endl;
 	cout<<c4(5,3)<<endl;
+	cout<<c4(50,3)<<endl;
+/*
+	cout<<C(10,10)<<endl;
+	cout<<C(10,13)<<endl;
+	cout<<C(-20,10)<<endl;
+	cout<<C2(10,2)<<endl;
+	cout<<C3(15,3)<<endl;
+	cout<<c4(25,3)<<endl;
+	cout<<c4(50,7)<<endl;
+	cout<<c4(20,5)<<endl;
+*/
 
 
 }
