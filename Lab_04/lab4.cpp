@@ -76,7 +76,6 @@ double c4(int n, int k)
 	double div;
 	double total;
 
-	(1+(n-k)/1) (1+(n-k)/2) (1+(n-k)/3) … (1+(n-k)/k)
 	for(int i=1;i<k;i++)
 	{
 		div=1+(n-k)/i;
