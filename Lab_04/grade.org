@@ -1,0 +1,18 @@
+| Category                    | Score | Notes |
+|-----------------------------+-------+-------|
+| Correctness  (65)           |    65 |       |
+|-----------------------------+-------+-------|
+| Structure (10)              |     5 |     1 |
+| Program Documentation  (10) |    10 |       |
+| Question documentation (15) |    12 |     2 |
+| Lateness penalty            |    -5 |       |
+|-----------------------------+-------+-------|
+| Total                       |    87 |       |
+#+TBLFM: @>$2=vsum(@2..@-1)
+* Notes
+1. Code should be formatted in a more readable way - as it is it's
+   hard to follow
+2. Problem was looking for when integer overflow would become a
+   problem (at 13).
+
+
