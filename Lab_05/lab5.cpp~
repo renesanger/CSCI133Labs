@@ -36,7 +36,10 @@ int numDigits(int num)
 
 
 /*
-	
+	numD is number of digits in num
+	loop from 0 to index-1 and divide num by 10 that many times
+	when you get to index(when it is out of the loop, get the remainder when divided by 10
+	return
 
 
 */
@@ -55,6 +58,19 @@ int getDigit(int num, int index)
 
 }
 
+/*
+	
+
+
+*/
+
+/* first loop:
+	called get digit to get each digit and sum it all together
+
+   loop 2:
+	put sum into old sum so i can use it in the iteration 
+	clear the sum and return new sum that is when adding the not one integer number.
+*/
 int sumDigits(int num)
 {
 	int sum=0;

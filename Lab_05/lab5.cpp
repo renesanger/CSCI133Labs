@@ -63,6 +63,14 @@ int getDigit(int num, int index)
 
 
 */
+
+/* first loop:
+	called get digit to get each digit and sum it all together
+
+   loop 2:
+	put sum into old sum so i can use it in the iteration 
+	clear the sum and return new sum that is when adding the not one integer number.
+*/
 int sumDigits(int num)
 {
 	int sum=0;
@@ -87,7 +95,9 @@ int sumDigits(int num)
 
 }
 
-
+/*
+	gets the remainder of n/9 and adding the difference to the sum to get a number divisible by 9
+*/
 void transformNum(int &n)
 {
 	int rem=n%9;
