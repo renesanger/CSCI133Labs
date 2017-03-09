@@ -6,26 +6,26 @@ using namespace std;
 
 int C(int n, int k)
 {
-int x=1;//n!
-int y=1;//k!
-int z=1;//(n-k)!
-int total;
-//cout<<x<<endl;
-for(int i=n;i>1;i--)
-{
-	x*=i;
-}
-for(int i=k;i>1;i--)
-{
-	y*=i;
+	int x=1;//n!
+	int y=1;//k!
+	int z=1;//(n-k)!
+	int total;
+	//cout<<x<<endl;
+	for(int i=n;i>1;i--)
+	{
+		x*=i;
+	}
+	for(int i=k;i>1;i--)
+	{
+		y*=i;
 
-}
-for(int i=n-k;i>1;i--)
-{
-	z*=i;
-}
+	}
+	for(int i=n-k;i>1;i--)
+	{
+		z*=i;
+	}
 
-total=x/(y*z);
+	total=x/(y*z);
 	return total;
 
 }
