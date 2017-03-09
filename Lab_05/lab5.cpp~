@@ -74,11 +74,14 @@ int getDigit(int num, int index)
 int sumDigits(int num)
 {
 	int sum=0;
-	
+	if(num<10)
+		return num;
+
 	for(int i=1; i<=numDigits(num);i++)
 	{
 		sum+=getDigit(num,i);
 	}
+
 	while((sum/10)!=0)
 	{
 		int oldSum=sum;
@@ -95,7 +98,9 @@ int sumDigits(int num)
 
 }
 
-
+/*
+	gets the remainder of n/9 and adding the difference to the sum to get a number divisible by 9
+*/
 void transformNum(int &n)
 {
 	int rem=n%9;
@@ -106,7 +111,12 @@ void transformNum(int &n)
 
 
 int main()
-{
+{	
+	int fred;	
+	cout<<" input a number for sum digits"<<endl;
+	cin>>fred;
+	cout<<"sum digits of inputed num: "<<sumDigits(fred)<<endl;
+	cout<<endl;
 	int n=234565;
 	cout<<endl;
 	cout<<"number of digits in 24535: "<<numDigits(24535)<<endl;
