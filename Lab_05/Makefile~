@@ -1,5 +1,11 @@
-main.o: lab5.cpp
-	g++ -o main lab5.cpp
+main: main.o digits.o
+	g++ -o main.o digits.o
+
+main.o: main.cpp digits.h
+	g++ -c main.cpp
+
+digits.o: digits.cpp digits.h
+	g++ -c digits.cpp
 
 run:
 	./main
