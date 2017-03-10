@@ -74,16 +74,23 @@ int getDigit(int num, int index)
 */
 int sumDigits(int num)
 {
-	int sum=0;
-	if(num<10)
-		return num;
-
-	for(int i=1; i<=numDigits(num);i++)
+	int sum = 0;
+	for(int i = 1;i <= numDigits(num);i++)
 	{
-		sum+=getDigit(num,i);
+		sum+=getDigit(num, i);
 	}
+	if(sum >= 10)
+	{
+		return sumDigits(sum);
+	}
+	else
+	{
+		return sum;
+	}
+/* before recursion
+	
 
-	while((sum/10)!=0)
+	while(sum/10!=0)
 	{
 		int oldSum=sum;
 		int sum=0;
@@ -91,11 +98,11 @@ int sumDigits(int num)
 		{
 			sum+=getDigit(oldSum,i);
 		}
-		return sum;
+		if(sum/10<=1)
+			return sum;
+		
 	}
-	
-
-
+*/
 
 }
 
@@ -104,8 +111,28 @@ int sumDigits(int num)
 */
 void transformNum(int &n)
 {
-	int rem=n%9;
-	int diff=9-rem;
-	n=n+diff;
+	int diff;
+	int rem;
+	int sum=sumDigits(n);
+	int last=getDigit(n,1);
+	if(last + 9 - n >= 10)
+	{
+		diff=9-sum;;
+		n=n+diff;
+	}
+	else
+	{
+		diff=sum-9;
+		n=n-diff;
+
+	}
 }
+
+
+
+
+
+
+
+
 

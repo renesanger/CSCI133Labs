@@ -10,4 +10,6 @@ digits.o: digits.cpp digits.h
 run:
 	./main
 	
+clean:
+	rm main.o digits.o main *~
 
