@@ -27,56 +27,50 @@ int menu()
 	if(letter=='r' || letter=='R')
 	{
 		int w;
-		int l;
+		int l="";
 		cout<<"input width parameter"<<endl;
 		cin>>w;
-		cout<<"input length parameter"<<endl;
-		cin>>l;
+		//cout<<"input length parameter"<<endl;
+		//cin>>l;
 		cout<<w<<" "<<l<<endl;
 	}
 }
 
-
-string line(int l, string c){
+void line(int l, string c){
 	string s;
 	for(int i=0; i<l;i++)
 		s+=c;
-	return s;
+
 }
 
 
-string rect(int w, int h)
+void rect(int w, int h)
 {
 	std::string  s="";
 	for(int i=1;i<=h;i++)
 	{
 		if(i==1 || i==h)
-			s+=line(w,"*") + "\n" ;
+			s+=line(w,'*') + '\n' ;
 		else
 		{
-			s+= "*" + line(w-2," ")+ "*" + "\n";
+			s+= '*' + line(w-2,' ')+ '*' + '\n';
 
 		}
 	}
-	return s;
-
-
-
 }
 
-string tri1(int side)
+void tri1(int side)
 {
 
 	string s;
 	for(int i=1;i<=side;i++)
 	{
-		s+=line(i,"*")+"\n";
+		s+=line(i,'*')+'\n';
 	}
-	return s;
 }
 
 
-string trap(int h, int b)
+void trap(int h, int b)
 {
 	string s;
 	for (int i = 0; i < h; i++)
@@ -85,63 +79,44 @@ string trap(int h, int b)
 			{
 				s+="*";
 			}
-			s+="\n";
+			s+='\n';
 			b = b + 1;
 	}
-	return s;
 }
 
 
-/*
-string trap(int side, int height)//basically a trianggle with top cut off
-{
-	string s;
-	for(int i=3;i<=side;i++)
-	{
-		s+=line(i,"*")+"\n";
-	}
-	return s;
-}
-*/
-
-
-string tri2(int side) // upper half of square
+void tri2(int side) // upper half of square
 {
 	string s;
 	for(int i=0;i<side;i++)
 	{
-		s+=line(i," ")+line(side-i,"*")+"\n";
+		s+=line(i,' ')+line(side-i,'*')+'\n';
 	}
-  	return s;
-
-
 
 }
 
 
 
-string circle(int r)
+void circle(int r)
 {
-string s;
-for (int i = 0; i <= 2*r; i++)
-{
-	
-	for (int j = 0; j <= 2*r; j++)
+	string s;
+	for (int i = 0; i <= 2*r; i++)
 	{
-        if ((r*r)==((j-r)*(j-r)+(i-r)*(i-r)))
-        {
-             s+="*";
-        }
-        else
-        {
-             s+=" ";
-        }
-    	}
-	s+="\n";
+	
+		for (int j = 0; j <= 2*r; j++)
+		{
+      			if ((r*r)==((j-r)*(j-r)+(i-r)*(i-r)))
+        		{
+            			 s+='*';
+        		}
+        		else
+        		{
+        		     s+=' ';
+       			}
+    		}
+		s+='\n';
 
-}
-
-return s;
+	}
 
 }
 
