@@ -3,5 +3,5 @@
 #include <math.h>
 using namespace std;
 
-void menu();
+int menu();
 

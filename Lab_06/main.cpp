@@ -4,27 +4,13 @@
 #include "shapes.h"
 using namespace std;
 
-/*
-int main()
-{
-  int i;
-  //cin >> i ;
-  /* cin will send a value into i and also return a status code. Recall that 
-     0 = false and anything else is true so, since i is an int, this loop will 
-     run until cin gets an int
-  /
-  while (!(cin >> i)){  // 
-    cin.clear();  // clear the error flag so it works next time through
-    cin.ignore(); // clear the buffer so it works next time through
-    cout << "ERROR" << endl;// simple error message   
-  }
-  cout << i << endl;
 
-  return 0;
-}
-*/
 int main(){
 	
+
+	menu();
+
+	/*
 	char letter;
 	//cin>>letter;
 	//cin.ignore();
