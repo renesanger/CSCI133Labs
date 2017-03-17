@@ -19,6 +19,84 @@ using namespace std;
 	five is a cirlcle that is given a radius
 	
 */
+void menu()
+{
+	while(1){
+		cout<<"Enter (R)ectangle, (L)owerTriangle, (T)rapezoid, (C)ircle, or (E)nd"<<endl;
+		char letter;
+		cin>>letter;
+	
+		if (letter=='R')
+		{
+			cout<<"input length of rectangle"<<endl;
+			int l;
+			while (!(cin >> l))
+			{   
+	    			cin.clear();  
+	    			cin.ignore(); 
+	    			cout << "ERROR: Enter integer: " << endl;
+	  		}
+			cout<<"input width of rectangle"<<endl;
+			int w;
+			while (!(cin >> w))
+			{   
+	    			cin.clear();  
+	    			cin.ignore(); 
+	    			cout << "ERROR: Enter integer: " << endl;
+	  		}
+			rect(l,w);
+		}
+		if (letter=='L')
+		{
+			cout<<"input side of triangle"<<endl;
+			int side;
+			while (!(cin >> side))
+			{   
+	    			cin.clear();  
+	    			cin.ignore(); 
+	    			cout << "ERROR: Enter integer: " << endl;
+	  		}	
+			tri1(side);
+		}
+		if (letter=='T'){
+			cout<<"input base of trapezoid"<<endl;
+			int b;
+			while (!(cin >> b))
+			{   
+	    			cin.clear();  
+	    			cin.ignore(); 
+	    			cout << "ERROR: Enter integer: " << endl;
+	  		}
+			cout<<"input height of trapezoid"<<endl;
+			int h;
+			while (!(cin >> h))
+			{   
+	    			cin.clear();  
+	    			cin.ignore(); 
+	    			cout <<"ERROR: Enter integer: " << endl;
+	  		}
+			trap(b, h);
+		}
+		if (letter=='C')
+		{
+			cout<<"input radius of circle"<<endl;
+			int r;
+			while (!(cin >> r))
+			{   
+	    			cin.clear();  
+	    			cin.ignore(); 
+	    			cout << "ERROR: Enter integer: " << endl;
+	  		}
+			circle(r);
+		}
+		if (letter=='E')
+		{
+			break;
+		}
+	}
+}
+
+
 string line(int l, string c)
 {
 	string s;
@@ -125,87 +203,6 @@ void circle(int r)
 
 cout << s << endl;
 
-}
-void menu()
-{
-	while(1){
-	cout<<"Enter (R)ectangle, (L)owerTriangle, (T)rapezoid, C(ircle), or (E)nd"<<endl;
-	char P;
-	cin>>P;
-
-	if (P=='R'){
-		cout<<"input length of rectangle"<<endl;
-		int l;
-		while (!(cin >> l)){   
-    			cin.clear();  
-    			cin.ignore(); 
-    			cout << "ERROR: Enter integer: " << endl;
-  		}
-		cout<<"input width of rectangle"<<endl;
-		int w;
-		while (!(cin >> w)){   
-    			cin.clear();  
-    			cin.ignore(); 
-    			cout << "ERROR: Enter integer: " << endl;
-  		}
-		rect(l,w);
-	}
-	if (P=='L'){
-		cout<<"input side of triangle"<<endl;
-		int stri;
-		while (!(cin >> stri)){   
-    			cin.clear();  
-    			cin.ignore(); 
-    			cout << "ERROR: Enter integer: " << endl;
-  		}	
-		tri1(stri);
-	}
-	if (P=='T'){
-		cout<<"input side of trapezoid"<<endl;
-		int strap;
-		while (!(cin >> strap)){   
-    			cin.clear();  
-    			cin.ignore(); 
-    			cout << "ERROR: Enter integer: " << endl;
-  		}
-		cout<<"input height of trapezoid"<<endl;
-		int htrap;
-		while (!(cin >> htrap)){   
-    			cin.clear();  
-    			cin.ignore(); 
-    			cout <<"ERROR: Enter integer: " << endl;
-  		}
-		trap(strap, htrap);
-	}
-	if (P=='C'){
-		cout<<"input radius of circle"<<endl;
-		int radius;
-		while (!(cin >> radius)){   
-    			cin.clear();  
-    			cin.ignore(); 
-    			cout << "ERROR: Enter integer: " << endl;
-  		}
-		circle(radius);
-	}
-	if (P=='E'){
-		break;
-	}
-	}
-
-	/*
-	char letter;
-	cout<<"Enter (R)ectangle, (L)owerTriangle, (T)rapezoid, (C)ircle, or (E)nd"<< endl;
-	cin>>letter;
-	if(letter=='r' || letter=='R')
-	{
-		int w;
-		int l;
-		cout<<"input width parameter"<<endl;
-		cin>>w;
-		cout<<"input length parameter"<<endl;
-		cin>>l;
-		cout<<w<<" "<<l<<endl;
-	}*/
 }
 
 
