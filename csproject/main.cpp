@@ -25,10 +25,10 @@ int main()
 	legal(inputSent);	
 
 	//elbonian translation
-	string s;
+	/*string s;
 	s="Map is large art";
 	string str= elbonian(s);
 	cout<<str<<endl;
-
-	//print();
+	*/
+	print();
 }

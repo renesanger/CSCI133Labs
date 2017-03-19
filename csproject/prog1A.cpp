@@ -15,7 +15,7 @@ using namespace std;
 	-check if sentence is legal
 */
 
-
+//turns the whole sentence lowercase
 string lower(string s)
 {
 	for(int i=0; i<s.length();i++)
@@ -26,6 +26,7 @@ string lower(string s)
 	return s;
 }
 
+//finds end of word
 int findWordEnd(string sent, int index)
 {
 	for(int i=index; i<sent.length()-1;i++)
@@ -38,6 +39,7 @@ int findWordEnd(string sent, int index)
 	return sent.length()-1;
 }
 
+//finds beginning of word
 int findNextWord(string sent, int index)
 {
 	for(int i=index;i<sent.length();i++)
@@ -50,21 +52,26 @@ int findNextWord(string sent, int index)
 	return sent.length();
 }
 
+//concatonates the syntax order in a string
 string syn(string word)
 {
 	string str="";
 	if(isNoun(word))
-		str+="noun";
-	if(isVerb(word)==1)
-		str+="verb";
-	if(isAdj(word))
-		str+="adjective";
-	if(isPronoun(word)==1)
-		str+="pronoun";
-	return str;
+		return str+="noun";
+	else if(isVerb(word)==1)
+		return str+="verb";
+	else if(isAdj(word))
+		return str+="adjective";
+	else if(isPronoun(word)==1)
+		return str+="pronoun";
+	else if(word=="")
+		return str;
+	else	
+		return " ";
 
 }
 
+//completes syntax
 string developSyn(string s)
 {
 	string syntax="";
@@ -72,6 +79,7 @@ string developSyn(string s)
 	string word2="";
 	string word3="";
 	string word4="";
+	string word5="";
 	int wordPos; 
 	int wordEndPos; 
 	int i=1;
@@ -80,12 +88,12 @@ string developSyn(string s)
 	word2= getWord2(s);
 	word3= getWord3(s);
 	word4= getWord4(s);
-
-	syntax= syn(word1) + syn(word2) + syn(word3) + syn(word4);
+	word5= getWord5(s);
+	syntax= syn(word1) + syn(word2) + syn(word3) + syn(word4) + syn(word5);
 	return syntax;
 }
 
-//pronoun, noun, verb, adjective
+//checks validity of pronoun, noun, verb, adjective
 bool isPronoun(string s)
 {
 	string pronoun;
@@ -103,6 +111,7 @@ bool isPronoun(string s)
 	return false;
 }
 
+//checks if its a noun
 bool isNoun(string s)
 {
 	string noun;
@@ -120,6 +129,7 @@ bool isNoun(string s)
 	return false;
 }
 
+//check if its a verb
 bool isVerb(string s)
 {
 	string verb;
@@ -137,6 +147,7 @@ bool isVerb(string s)
 	return false;
 }
 
+//checks if its an adjective
 bool isAdj(string s)
 {
 	string adj;
@@ -154,6 +165,7 @@ bool isAdj(string s)
 	return false;
 }
 
+//checks if syntax follows rule
 int isValid(string s)
 {
 	if(s=="nounverbnoun")
@@ -169,9 +181,7 @@ int isValid(string s)
 	return 0;
 }
 
-
-
-
+//gets the word depending on starting and ending index
 string getWord(string sent,int start, int end)
 {
 	string s="";
@@ -183,6 +193,8 @@ string getWord(string sent,int start, int end)
 	return s;
 
 }
+
+//gets first word
 string getWord1(string s)
 {
 	string word1="";
@@ -207,6 +219,7 @@ string getWord1(string s)
 
 }
 
+//gets second word
 string getWord2(string s)
 {
 	string word2="";
@@ -230,6 +243,7 @@ string getWord2(string s)
 	return word2;
 }
 
+//gets third word
 string getWord3(string s)
 {
 	string word3="";
@@ -254,6 +268,7 @@ string getWord3(string s)
 
 }
 
+//gets fourth word
 string getWord4(string s)
 {
 	string word4="";
@@ -278,9 +293,34 @@ string getWord4(string s)
 
 }
 
-
-void legal(string s)
+//gets fifth word
+string getWord5(string s)
 {
+	string word5="";
+	int wordPos; 
+	int wordEndPos; 
+	int i=1;
+	
+	for(wordPos=0; wordPos< s.length();)
+	{
+		wordPos = findNextWord(s, wordPos);
+		wordEndPos = findWordEnd(s, wordPos);
+
+		if(i==5)
+		{
+			word5=getWord(s,wordPos,wordEndPos);
+		}
+		wordPos=wordEndPos+1;
+		i++;
+	}
+	return word5;
+
+
+}
+
+//prints whether or not the sentence is legal.
+void legal(string s)
+{	
 	string syntax=developSyn(s);
 	if(isValid(syntax)>0)
 		cout<<"Your sentence is a legal sentance by rule " << isValid(syntax)<<endl;

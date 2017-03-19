@@ -13,6 +13,7 @@ using namespace std;
 	-translates a file into elbonian
 */
 
+//translates a valid sentence into elbonian
 string elbonian(string s)
 {
 	string str="";
@@ -43,18 +44,22 @@ string elbonian(string s)
 
 }
 
+//creates a new file and translates the old file
 void print()
 {
 	string elb;
+	ofstream elbsents;
 	fstream engsents;
 	engsents.open("engsents");
+	elbsents.open("elbsents");
 	
 	while(!engsents.eof())
 	{	
 		getline(engsents, elb);
 		if(elb!="")
-			cout<<elbonian(elb)<<endl;
+			elbsents<<elbonian(elb)<<endl;
 		
 	}
 	engsents.close();
+	elbsents.close();
 }

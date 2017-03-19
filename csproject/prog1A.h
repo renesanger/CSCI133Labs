@@ -19,5 +19,6 @@ string getWord1(string s);
 string getWord2(string s);
 string getWord3(string s);
 string getWord4(string s);
+string getWord5(string s);
 
 void legal(string s);
