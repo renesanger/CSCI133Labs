@@ -1,0 +1,8 @@
+main: q1.cpp
+	g++ -o main p1.cpp
+
+debug: q1.cpp
+	GDB ./main
+
+clean:
+	rm main
