@@ -17,7 +17,7 @@
 using namespace std;
 
 //const int MAXWIDTH = 512;
-//c/onst int MAXHEIGHT = 512;
+//const int MAXHEIGHT = 512;
 
 // reads a PPM file.
 // Notice that: width and height are passed by reference!
@@ -52,7 +52,7 @@ void readImage(int image[][MAXHEIGHT], int &width, int &height) {
 
 void writeImage(string fname, int image[][MAXHEIGHT], int width, int height) {
   ofstream ostr;
-  ostr.open(fname);
+  ostr.open(fname.c_str());
   if (ostr.fail()) {
     cout << "Unable to write file\n";
     exit(1);
@@ -78,4 +78,61 @@ void writeImage(string fname, int image[][MAXHEIGHT], int width, int height) {
   ostr.close();
   return;
 }
+
+void highlight(int image[][MAXHEIGHT],int width, int height, int t1, int t2)
+{
+  for (int y=0;y<height;y++){
+    for (int x=40;x<150;x++) {
+      
+		if(image[x][y]<t1)
+      			image[x][y]=0;
+		else if(image[x][y]>t2)
+			image[x][y]=255;
+    }
+
+  }
+}
+
+int avgColor(int image[],int n)
+{
+	int sum=0;
+	for(int i=0; i<(n*n);i++)
+	{
+		sum+=image[i];
+	}
+	return sum/n;
+}
+
+void scale(int image[][MAXHEIGHT],int width, int height, int n)
+{
+	int arr[n*n];
+	int mat[(n/2)][(n/2)];
+  	for (int y=0;y<n;y++){
+  	  for (int x=0;x<n;x++) {
+		image[0][0]=avgColor(arr,n);
+    }
+
+  }
+	//image=mat;
+	cout<<avgColor(arr,n)<<endl;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

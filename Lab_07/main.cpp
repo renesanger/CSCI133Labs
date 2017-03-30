@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <fstream>
 #include "imageio.h"
 
 
@@ -17,13 +17,20 @@ void change(int image[][512],int w, int h){
 
 int main()
 {
+	task0();
+	return 0;
+}
+
+void task0()
+{
   int image[512][512];
   int h=512;
   int w=512;
+	int n=2;
   readImage(image,w,h);
-  change(image,w,h);
-    writeImage("out.png",image,w,h);
-  return 0;
+  //change(image,w,h);
+	//highlight(image,w,h,30,88);
+scale( image, w,  h,  n);
+   writeImage("out.pgm",image,w,h);
+  return;
 }
-
-
