@@ -92,7 +92,7 @@ void highlight(int image[][MAXHEIGHT],int width, int height, int t1, int t2)
 
   }
 }
-
+/*
 int avgColor(int image[],int n)
 {
 	int sum=0;
@@ -100,23 +100,75 @@ int avgColor(int image[],int n)
 	{
 		sum+=image[i];
 	}
-	return sum/n;
+	return sum;
 }
+*/
 
+int avgColor(int image[][MAXHEIGHT],int n)
+{
+	int sum=0;
+  	for (int y=0;y<n;y++){
+		for (int x=0;x<n;x++) {
+			sum+=image[x][y];
+			sum/=n;
+    		}
+	}
+	return sum;
+}
 void scale(int image[][MAXHEIGHT],int width, int height, int n)
 {
-	int arr[n*n];
-	int mat[(n/2)][(n/2)];
-  	for (int y=0;y<n;y++){
-  	  for (int x=0;x<n;x++) {
-		image[0][0]=avgColor(arr,n);
+	/*//int arr[n*n];
+	int pix=height/n;
+	int mat[512][512];
+cout<<avgColor(image,n)<<endl;
+ 	mat[0][0]=avgColor(image,n);
+*/
+	
+	readImage(image,width,height);
+	int nImage[width/n][height/n];
+
+
+	for(int i=0; i+n<=width;i+=n)
+	{
+		for(int j=0; j+n<=height;j+=n)
+		{
+			int avg=0;
+			for(int x=i;x<i+n;x++)
+			{
+				for(int y=j;y<j+n;y++)
+				{
+					avg+=image[x][y];
+				}
+			}
+			avg/=(n*n);
+			nImage[i/n][j/n]=avg;		
+		}
+	}	
+	ofstream ostr;
+ 	ostr.open("task2.pgm");
+  	if (ostr.fail()) {
+   		cout << "Unable to write file\n";
+   	 	exit(1);
+  	}
+  
+  	// print the header
+ 	ostr << "P2" << endl;
+  	// width, height
+  	ostr << width/n << ' '; 
+  	ostr << height/n << endl;
+  	ostr << 255 << endl;
+
+  for (int row = 0; row < height/n; row++) {
+    for (int col = 0; col < width/n; col++) {
+      assert(nImage[col][row] < 256);
+      assert(nImage[col][row] >= 0);
+      ostr << nImage[col][row] << ' ';
+      // lines should be no longer than 70 characters
+      if ((col+1)%16 == 0) ostr << endl;
     }
-
+    ostr << endl;
   }
-	//image=mat;
-	cout<<avgColor(arr,n)<<endl;
-
-
+  ostr.close();
 
 }
 
