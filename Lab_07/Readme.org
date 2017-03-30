@@ -1,0 +1,38 @@
+* Additional instructions for Lab 7
+
+* Changes from the lab description
+** void writeImage(string fname,int image[][MAXHEIGHT], int width, int height);
+In the lab description, *writeImage* only asks for the int array
+(image), width, and height. 
+
+Our version also asks for a filename as the first parameter so we can
+save different output files.
+
+* Important lab instructions
+** Task 0
+
+For this, make function with the prototype ~void task0()~. It should declare arrays as
+specified in the question as local variables and it should read the
+source image using *readImage*.
+
+It should save an image named *task0.pgm* 
+
+** Task 1
+
+In addition to writing *highlight* as specified in the question,
+also write a function ~void task1()~. 
+
+This function should read the starter image (as in task0) and then,
+instead of asking for using input, it should call highlight on the
+source image and then save it. After this routine, you should have
+saved images named *task1-1.pgm*, *task1-2.pgm*, and *task1-3.pgm*.
+
+
+** Task 2
+
+As described in the question, write the function but have it save the
+output image under the name *task2.pgm*
+ 
+* 
+#+BEGIN_HTML
+#+END_HTML
