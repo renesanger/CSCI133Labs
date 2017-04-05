@@ -174,8 +174,7 @@ cout<<avgColor(image,n)<<endl;
 
 bool hedgeDet()
 {
-	
-	int ePixel=(g+2h+i)-(a+2b+c);
+  return true;
 
 
 }

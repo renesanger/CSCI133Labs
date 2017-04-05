@@ -26,7 +26,7 @@ void task0()
   int image[512][512];
   int h=512;
   int w=512;
-	int n=2;
+	int n=4;
   readImage(image,w,h);
   //change(image,w,h);
 	//highlight(image,w,h,30,88);
