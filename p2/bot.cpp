@@ -5,6 +5,21 @@
 #include "bot.h"
 #include "screen.h"
 
+/*
+  Author: Rene Sanger
+  Course: {136}
+  Instructor: Raffi
+  Assignment: "project 2"
+
+  This program does ...
+	-takes a list of data from a csv file
+	-inputs and reads
+	-seperates the data of each country
+	-sorts by population growth rate
+	-prints
+*/
+
+
 using namespace std;
 
 int ROWS;
@@ -20,6 +35,8 @@ bool hitsunk=false;
 bool found=false;
 int direction=0;
 int histroy[20];
+int step=0;
+int lastDir=3;
 
 
 /* Initialization procedure, called when the game starts:
@@ -79,52 +96,220 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 	}*/
 	if(found)
 	{
-		int step=1;
-		//down
-		if(prevHit && hitR!=ROWS && step==0)
-		{
-			step++;
+		step++;
 		
-		}
 		//up
-		else if(prevMiss)
+		if(prevMiss)
 		{
-			//direction++;
+			direction++;
+			step=1;
 		}
-
-
+		
 
 		if(direction==0)
 		{
-			r=hitR+1;
+			r=hitR+step;
 			c=hitC;
+		
+			if((hitR+step)>ROWS-1)
+			{
+				direction=1;
+				step=1;
+			}
+			if(mem[r][c]>0)
+			{
+				direction=1;
+				step=1;
+			}
 		}		
 		if(direction==1)
 		{
 			//up
-			r=hitR-1;
+			r=hitR-step;
 			c=hitC;
-
+			if ((hitR-step)<0)
+			{
+				direction=2;
+				step=1;
+			}
+			if(mem[r][c]>0)
+			{
+				direction=2;
+				step=1;
+				
+			}
 		}
 		if(direction==2)
 		{
 		
 			//left
 			r=hitR;
-			c=hitC-1;
+			c=hitC-step;
+			if((hitC-step)<0)
+			{
+				direction=3;
+				step=1;
+			}
+			if(mem[r][c]>0)
+			{
+				direction=3;
+				step=1;
+			}
 		}
 		if(direction==3)
 		{
 			//right
 			r=hitR;
-			c=hitC+1;
+			c=hitC+step;
+			if((hitC+step)>COLS-1)
+			{
+				direction=2;
+				step=1;
+			}
+			if(mem[r][c]>0)
+			{
+				direction=0;
+				step=1;
+			}	
 		}
+		if(direction==2)
+		{
+		
+			//left
+			r=hitR;
+			c=hitC-step;
+			if((hitC-step)<0)
+			{
+				direction=3;
+				step=1;
+			}
+			if(mem[r][c]>0)
+			{
+				direction++;
+				step=1;
+			}
+		}
+		lastDir=direction;
 	}
-	while(mem[r][c]>0)
+	if(!found)
+	{
+
+		//if last direction was vertical
+		if(lastDir ==0 ||lastDir ==1)
+		{
+			r=hitR;
+			c=hitC+2;
+			if(mem[r][c]>0 || c>COLS-1)
+			{
+				c=hitC-2;
+			}
+	
+		}
+		//if last direction was horizontal
+		if(lastDir ==2 ||lastDir ==3)
+		{
+			r=hitR+2;
+			c=hitC;
+			if(mem[r][c]>0 || r> ROWS-1)
+			{
+				r=hitR-2;
+			}
+		}
+
+	}
+	while(mem[r][c]>0 || c<0 ||r<0 ||c>COLS-1||r>ROWS-1)
 	{
 		r=rand()%ROWS;
 		c=rand()%COLS;
 	}
+
+
+
+	if(!found)
+	{
+	int i= r;
+	int j= r;
+	int a;
+	int b;
+	bool toosmall=false;
+	int longest;
+	int widest;
+	
+
+
+	while(mem[i][c]<3 && i<ROWS)
+	{
+		i++;
+	}
+	while(mem[j][c]<3 && j>=0)
+	{
+		j--;
+	}
+	longest= i-j-1;	
+
+	
+	a= c;
+	b= c;
+	while(mem[r][a]<3 && a<COLS)
+	{
+		a++;
+	}
+	while(mem[r][b]<3 && b>=0)
+	{
+		b--;
+	}
+	widest= a-b-1;
+
+
+
+	while(((longest<sml)&&(widest<sml)) || mem[r][c]>0 || c<0 ||r<0 ||c>COLS-1||r>ROWS-1)
+	{
+		r=rand()%ROWS;
+		c=rand()%COLS; 
+		i=r;
+		j=r;
+		while(mem[i][c]<3 && i<ROWS)
+		{
+			i++;
+		}
+		while(mem[j][c]<3 && j>=0)
+		{
+			j--;
+		}
+		if(b==0)
+		{
+			longest= i-j;	
+		}
+		else
+		{
+			longest= i-j-1;	
+
+		}
+	
+		a= c;
+		b= c;
+		while(mem[r][a]<3 && a<COLS)
+		{
+			a++;
+		}
+		while(mem[r][b]<3 && b>0)
+		{
+			b--;
+		}
+		if(b==0)
+		{
+			widest= a-b;
+		}
+		else
+		{
+			widest= a-b-1;
+		}
+	}
+
+	}
+	
+
+
 	result res=gun.shoot(r, c);
 	
 	
@@ -137,8 +322,14 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
     		{
       			screen.mark(r, c, '@', GREEN); 
       			mem[r][c]=1;
-			hitR=r;
-			hitC=c;
+
+
+			if(!found)
+			{
+				hitR=r;
+				hitC=c;
+			}
+			prevMiss=false;
 			prevHit=true;
 			prevSunk=false;
 			found=true;
@@ -150,6 +341,102 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
       			screen.mark(r, c, 'S', RED); 
       			mem[r][c]=2;
 
+
+
+			if(direction==0)
+			{
+				
+
+				int jump=r-1;
+				while(mem[jump][c]==1)
+				{
+					mem[jump][c+1]=3;
+					screen.mark(jump, c+1, 'x', BLUE); 
+					mem[jump][c-1]=3;
+					screen.mark(jump, c-1, 'x', BLUE); 
+					jump--;
+					
+				}
+			
+				mem[jump][c]=3;
+				screen.mark(jump, c, 'x', BLUE); 
+
+					
+			}
+
+			if(direction==1)
+			{
+				
+
+				int jump=r+1;
+				while(mem[jump][c]==1)
+				{
+					mem[jump][c+1]=3;
+					screen.mark(jump, c+1, 'x', BLUE); 
+					mem[jump][c-1]=3;
+					screen.mark(jump, c-1, 'x', BLUE); 
+					jump++;
+				}
+
+				//loop down if sunk is in the middle
+				jump=r-1;
+				while(mem[jump][c]==1)
+				{
+					mem[jump][c+1]=3;
+					screen.mark(jump, c+1, 'x', BLUE); 
+					mem[jump][c-1]=3;
+					screen.mark(jump, c-1, 'x', BLUE); 
+					jump--;
+					
+				}
+			}
+
+			if(direction==2)
+			{
+				
+
+				int jump=c+1;
+				while(mem[r][jump]==1)
+				{
+					mem[r+1][jump]=3;
+					screen.mark(r+1, jump, 'x', BLUE); 
+					mem[r-1][jump]=3;
+					screen.mark(r-1, jump, 'x', BLUE); 
+					jump++;
+				}
+				
+				mem[r][jump]=3;
+				screen.mark(r, jump, 'x', BLUE); 
+						
+			}
+
+			if(direction==3)
+			{
+				
+
+				int jump=c-1;
+				while(mem[r][jump]==1)
+				{
+					mem[r+1][jump]=3;
+					screen.mark(r+1, jump, 'x', BLUE); 
+					mem[r-1][jump]=3;
+					screen.mark(r-1, jump, 'x', BLUE); 
+					jump--;
+				}
+			
+				jump=c+1;
+				while(mem[r][jump]==1)
+				{
+					mem[r+1][jump]=3;
+					screen.mark(r+1, jump, 'x', BLUE); 
+					mem[r-1][jump]=3;
+					screen.mark(r-1, jump, 'x', BLUE); 
+					jump++;
+				}
+			}
+
+
+			//marks everything around sunk 's' as miss
 			if(mem[r-1][c]!=1)
 			{
 				mem[r-1][c]=3;
@@ -171,70 +458,24 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 				screen.mark(r+1, c, 'x', BLUE); 
 			}
 
-			/*later on i will make this into a loop*/
-			bool done=false;
 
-
-
-			/*
-
-			if(mem[r-4][c]==1 && !done)
-			{
-				mem[r-4][c-1]=3;
-				screen.mark(r-3, c-1, 'x', BLUE); 
-				mem[r-4][c+1]=3;
-				screen.mark(r-3, c+1, 'x', BLUE); 
-			}
-			if(mem[r-3][c]==1 && !done)
-			{
-				mem[r-3][c-1]=3;
-				screen.mark(r-3, c-1, 'x', BLUE); 
-				mem[r-3][c+1]=3;
-				screen.mark(r-3, c+1, 'x', BLUE); 
-			}
-			if(mem[r-2][c]==1 && !done)
-			{
-				mem[r-2][c-1]=3;
-				screen.mark(r-2, c-1, 'x', BLUE); 
-				mem[r-2][c+1]=3;
-				screen.mark(r-2, c+1, 'x', BLUE); 
-			}*/
-			if(mem[r-1][c]==1 && !done)
-			{
-				mem[r-1][c-1]=3;
-				screen.mark(r-1, c-1, 'x', BLUE); 
-				mem[r-1][c+1]=3;
-				screen.mark(r-1, c+1, 'x', BLUE); 
-			}
-			if(mem[r+1][c]==1 && !done)
-			{
-				mem[r+1][c-1]=3;
-				screen.mark(r+1, c-1, 'x', BLUE); 
-				mem[r+1][c+1]=3;
-				screen.mark(r+1, c+1, 'x', BLUE); 
-			}
-			int a=r-1;
-			int b=c-1;
-			while(mem[a][b]==1)
-			{	
-				
-				mem[a][b-1]=3;
-				screen.mark(a, b-1, 'x', BLUE); 
-				mem[a][b+1]=3;
-				screen.mark(a, b+1, 'x', BLUE); 
-				a--;
-	
-			}
 			prevHit=false;
 			prevSunk=true;
+			prevMiss=false;
+			found=false;
+			step=0;
+			direction=0;
     		}
   	else 
     		if (res == MISS)
 	{
     		screen.mark(r, c, 'x', BLUE); 
     		mem[r][c]=3;
+
+
+
+
 		prevHit=false;
-		
 		prevMiss=true;
   	}
 
