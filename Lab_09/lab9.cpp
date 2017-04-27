@@ -41,7 +41,7 @@ double* task0()
 		i++;	
 	}
 	cout<<endl;
-	delete[] arr;
+	
 
 	return arr;
 
@@ -58,6 +58,7 @@ double eval(double* poly, int degree, double x)
 		total+=poly[i]*pow(x,i);
 	}
 	cout<<total<<endl;	
+	delete[] poly;
 	return total;
 
 
@@ -66,11 +67,43 @@ double eval(double* poly, int degree, double x)
 int main()
 {
 	double *arr;
-	arr= new double[1000];
+	arr= new double[degree+1];
 	arr=task0();
 	
-	eval(arr, degree, 3);
-	//delete[] arr;
+
+
+	/*Task 4
+
+	double d=arr[degree+2];
+	cout<<d<<endl;
+
+	when typing the above code, it accessed a location that was out of the bounds of the 		array and returned a garbage number that did not really mean anything. it was a large 		negative number
+
+	when the same piece of code is placed after the eval() is called, it returns 0
+	ultimately, when accessing an element that is either out of the heap or not in the 		bounds of the array, it is often unpredictable.
+
+	*/ 
+
+
+
+	eval(arr, degree, 2);
+
+
+
+	//eval(arr, degree, 2);	
+	/*
+		Task 3:
+		basically when i uncomment the above code, there is an error that says,
+
+		*** Error in `./main': double free or corruption (fasttop): 0x00000000011d4f60 			***
+		Aborted (core dumped)
+
+		what happens is that youre trying to access data that cannot be accessed 			because for the first function call of eval() you deleted the array and the 			second call, you try to access it and then the error comes.
+
+	*/
+
+	
+	
 	return 0;
 }
 
