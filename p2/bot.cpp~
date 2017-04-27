@@ -75,63 +75,97 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 {
 
 	
-  	//int maxsize=ROWS*COLS+lrg*num;
 
 
+	//default programming is to set the shot aimed at random location
 	int r = rand() % ROWS;
   	int c = rand() % COLS;
   
 
-
+	//default log statement made by instructors
   	log << "Smallest: " << sml << " Largest: " << lrg << ". ";
 
 
-	/*for(int i=0;i<ROWS;i++)
-	{
-		for(int j=0;j<COLS;j++)
-		{
-			if(mem[i][j]!=0 && mem[i][j]!=1 && mem[i][j]!=2)
-				mem[i][j]=-1;
-		}
-	}*/
+
+	/*
+		when found variable is true (only when after you hit a ship)
+		you shoot at locations around the hit using a variable called
+		hitR and hitC. based on direction go up 1 or down1 or left1 or right1
+
+		Global Variables:
+		direction
+			-if equal to 0: (default) go down
+			-if equal to 1: go up
+			-if equal to 2: go left
+			-if equal to 3: go right
+
+		found:
+			-once you hit a ship found is true until you sink the ship.
+			-default: false
+
+		prevMiss:
+			-if last hit was a miss, equal to true, and change direction and default: step=1
+
+		step:
+			-the increment 
+			-default is one
+			-use hitR and hitC (first hit location) and direction and add it by step.
+		lastDir:
+			-saved direction of previously hit and sunk ship
+
+		mem[][]:
+			-history of each shot mimicking the board. using numbers 0,1,2,3 
+			-0,1,2,3 is not shot, hit, sink, miss  corresponding relatively
+
+		
+
+	*/
 	if(found)
 	{
+		//step was 0 initially, hit then step=1 miss, change direction and step=1, keep going each step
 		step++;
 		
-		//up
+
+		//if last shot was a miss chang direction and resart the step count to 1
 		if(prevMiss)
 		{
 			direction++;
 			step=1;
 		}
 		
-
+		//if direction goes down
 		if(direction==0)
 		{
+			//one row down
 			r=hitR+step;
 			c=hitC;
 		
+			//if selected row is out of board
 			if((hitR+step)>ROWS-1)
 			{
 				direction=1;
 				step=1;
 			}
+			//if location already shot at
 			if(mem[r][c]>0)
 			{
 				direction=1;
 				step=1;
 			}
-		}		
+		}
+		//up		
 		if(direction==1)
 		{
-			//up
+			
 			r=hitR-step;
 			c=hitC;
+			//if selected row is out of board
 			if ((hitR-step)<0)
 			{
 				direction=2;
 				step=1;
 			}
+			//if location already shot at
 			if(mem[r][c]>0)
 			{
 				direction=2;
@@ -139,33 +173,38 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 				
 			}
 		}
+		//left
 		if(direction==2)
 		{
 		
-			//left
+
 			r=hitR;
 			c=hitC-step;
+			//if selected col is out of board
 			if((hitC-step)<0)
 			{
 				direction=3;
 				step=1;
 			}
+			//if location already shot at
 			if(mem[r][c]>0)
 			{
 				direction=3;
 				step=1;
 			}
 		}
+		//right
 		if(direction==3)
 		{
-			//right
 			r=hitR;
 			c=hitC+step;
+			//if selected col is out of board
 			if((hitC+step)>COLS-1)
 			{
 				direction=2;
 				step=1;
 			}
+			//if location already shot at
 			if(mem[r][c]>0)
 			{
 				direction=0;
@@ -178,11 +217,13 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 			//left
 			r=hitR;
 			c=hitC-step;
+			//if selected col is out of board
 			if((hitC-step)<0)
 			{
 				direction=3;
 				step=1;
 			}
+			//if location already shot at
 			if(mem[r][c]>0)
 			{
 				direction++;
@@ -191,6 +232,7 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 		}
 		lastDir=direction;
 	}
+	//where to shoot after last ship was sunk: hits two locations away from last ship depending on direction, adding 2 or subtracting two
 	if(!found)
 	{
 
@@ -199,6 +241,7 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 		{
 			r=hitR;
 			c=hitC+2;
+			//if allready shot at go hit opposite side
 			if(mem[r][c]>0 || c>COLS-1)
 			{
 				c=hitC-2;
@@ -210,6 +253,7 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 		{
 			r=hitR+2;
 			c=hitC;
+			//if allready shot at go hit opposite side
 			if(mem[r][c]>0 || r> ROWS-1)
 			{
 				r=hitR-2;
@@ -217,6 +261,7 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 		}
 
 	}
+	//if already shot at, go random
 	while(mem[r][c]>0 || c<0 ||r<0 ||c>COLS-1||r>ROWS-1)
 	{
 		r=rand()%ROWS;
@@ -224,50 +269,33 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 	}
 
 
-
+	//filtering the !found shots
 	if(!found)
 	{
-	int i= r;
-	int j= r;
-	int a;
-	int b;
-	bool toosmall=false;
-	int longest;
-	int widest;
+
+		/*
+			save the slected row r in two variables i and j
+			i:
+			-used for incrementing r until miss or end of board	
+			j:
+			-used for decrementing r until miss or end of board
+			longest:
+				-longest space in reference to the shot location
+				-i+j-1 (-1 because overcounted by 1)
+
+			toosmall: i didnt use it but could have.
+	
+		*/
+		int i= r;
+		int j= r;
+		int a;
+		int b;
+		bool toosmall=false;
+		int longest;
+		int widest;
 	
 
 
-	while(mem[i][c]<3 && i<ROWS)
-	{
-		i++;
-	}
-	while(mem[j][c]<3 && j>=0)
-	{
-		j--;
-	}
-	longest= i-j-1;	
-
-	
-	a= c;
-	b= c;
-	while(mem[r][a]<3 && a<COLS)
-	{
-		a++;
-	}
-	while(mem[r][b]<3 && b>=0)
-	{
-		b--;
-	}
-	widest= a-b-1;
-
-
-
-	while(((longest<sml)&&(widest<sml)) || mem[r][c]>0 || c<0 ||r<0 ||c>COLS-1||r>ROWS-1)
-	{
-		r=rand()%ROWS;
-		c=rand()%COLS; 
-		i=r;
-		j=r;
 		while(mem[i][c]<3 && i<ROWS)
 		{
 			i++;
@@ -277,32 +305,93 @@ void next_turn(int sml, int lrg, int num, Gun &gun, Screen &screen, ostream &log
 			j--;
 		}
 		longest= i-j-1;	
-
 	
+	
+		/*
+			save the slected col c in two variables a and b
+			a:
+			-used for incrementing c until miss or end of board	
+			b:
+			-used for decrementing c until miss or end of board
+			widest:
+				-longest space in reference to the shot location
+				-a+b-1 (-1 because overcounted by 1)
+	
+		*/
+
 		a= c;
 		b= c;
 		while(mem[r][a]<3 && a<COLS)
 		{
 			a++;
 		}
-		while(mem[r][b]<3 && b>0)
+		while(mem[r][b]<3 && b>=0)
 		{
 			b--;
 		}
-		if(b==0)
+		widest= a-b-1;
+
+
+
+		/*
+			sml is the initial argument: smallest ship on board
+
+			go through while loop if:
+			-both longest and widest distances is smaller than sml
+			-location already hit
+			-shot is out of board (4 booleans)
+
+			this while loop just repeats the previous process if it goes through,... 
+
+		*/
+		while(((longest<sml)&&(widest<sml)) || mem[r][c]>0 || c<0 ||r<0 ||c>COLS-1||r>ROWS-1)
 		{
-			widest= a-b;
+			r=rand()%ROWS;
+			c=rand()%COLS; 
+			i=r;
+			j=r;
+			while(mem[i][c]<3 && i<ROWS)
+			{
+				i++;
+			}
+			while(mem[j][c]<3 && j>=0)
+			{
+				j--;
+			}
+			if(b==0)
+			{
+				longest= i-j;	
+			}
+			else
+			{
+				longest= i-j-1;	
+	
+			}
+	
+			a= c;
+			b= c;
+			while(mem[r][a]<3 && a<COLS)
+			{
+				a++;
+			}
+			while(mem[r][b]<3 && b>0)
+			{
+				b--;
+			}
+			if(b==0)
+			{
+				widest= a-b;
+			}
+			else
+			{
+				widest= a-b-1;
+			}
 		}
-		else
-		{
-			widest= a-b-1;
-		}
-	}
 
 	}
 	
 
-
+	//shoot
 	result res=gun.shoot(r, c);
 	
 	
