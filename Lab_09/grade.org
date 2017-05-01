@@ -1,0 +1,14 @@
+| Category               | Score | Notes |
+|------------------------+-------+-------|
+| Correctness task3 (70) |    65 |       |
+|------------------------+-------+-------|
+| structure (20)         |    20 |       |
+| Documentation  (10)    |    10 |       |
+| Misc                   |       |       |
+|------------------------+-------+-------|
+| Total                  |    95 |       |
+#+TBLFM: @>$2=vsum(@2..@-1)
+
+* Notes
+- You shouldn't delete in eval but rather when you know you're done
+  with the array. Nice overall
