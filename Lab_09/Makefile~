@@ -1,0 +1,5 @@
+main: main.cpp
+	g++ -o main lab9.cpp
+
+run:
+	./main
