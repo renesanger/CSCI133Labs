@@ -1,0 +1,1 @@
+I found recursive was difficult but i used many online sources on how to use recursive functions and imlemented recursion on the tasks. i still dont understand though, how to print statetement in a recursive function without it repeating 3 times.
