@@ -42,7 +42,7 @@ double* task0()
 	}
 	cout<<endl;
 	
-
+	delete[] arr; 
 	return arr;
 
 }
@@ -64,28 +64,13 @@ double eval(double* poly, int degree, double x)
 
 }
 
-void task2()
-{
-	
-
-
-}
-
 int main()
 {
 	double *arr;
 	arr= new double[degree+1];
 	arr=task0();
-
-	double *p1;
-	arr= new double[degree+1];
-	p1=task0();
-/*
-	double *p2;
-	p2= new double[degree+1];
-	p2=task0();
 	
-*/
+
 
 	/*Task 4
 
