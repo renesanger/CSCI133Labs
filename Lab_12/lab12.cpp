@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 	{index=0;}
 
 //if the index tries to access something out of the array 
-	if(index>15)
+	if(index>14)
 	{index=0;}
 
 /*
@@ -92,7 +92,7 @@ it was a shallow copy instead of a deep copy where arr2 does not have its own se
 	{arr2[i]=values[i];}
 
 	values[index]=9;   
-	arr2[1]=8;
+	arr2[index+1]=8;
 	cout << "value is:" <<endl;   
 	printArray(values);
 	cout<< endl<< "arr2 is:"<<endl;    
