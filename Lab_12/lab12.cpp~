@@ -3,17 +3,6 @@
 #include <iomanip>
 using namespace std;
 
-/*
-  Author: Rene
-  Course: 136
-  Instructor: Mike Zamansky
-  Assignment: "lab12"
-
-	this program initializes an array with a a specific value 
-	and modifies an element based on arguments given to main.
-*/
-
-
 const int MAXSIZE = 16; 
 static int values[MAXSIZE]; 
 static int i; 
