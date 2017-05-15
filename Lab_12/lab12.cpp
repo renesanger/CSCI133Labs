@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
 	if(argc>1) 
 	{dummy=atoi(argv[1]);}
 	else
-	{dummy=0;}
+	{dummy=5;}
 	
 	if(argc>2) 
 	{index=atoi(argv[2]);}
