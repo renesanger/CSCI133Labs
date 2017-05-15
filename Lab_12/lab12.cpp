@@ -20,7 +20,8 @@ static int i;
 // bad idea to call a global variable i! 
 
 
-void initArray(int[], int); void printArray(int[]);
+void initArray(int[], int); 
+void printArray(int[]);
 // This initializes element arr[i] to val for each array element 
 
 
@@ -72,7 +73,11 @@ int main(int argc, char* argv[])
 	if(argc>2) 
 	{index=atoi(argv[2]);}
 	else
-	{dummy=0;}
+	{index=0;}
+
+//if the index tries to access something out of the array 
+	if(index>15)
+	{index=0;}
 
 /*
 -the next thing i noticed was that vallues array and arr2 array were pointing to the same object.

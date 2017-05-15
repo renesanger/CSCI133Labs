@@ -3,6 +3,17 @@
 #include <iomanip>
 using namespace std;
 
+/*
+  Author: Rene
+  Course: 136
+  Instructor: Mike Zamansky
+  Assignment: "lab12"
+
+	this program initializes an array with a a specific value 
+	and modifies an element based on arguments given to main.
+*/
+
+
 const int MAXSIZE = 16; 
 static int values[MAXSIZE]; 
 static int i; 
@@ -61,7 +72,11 @@ int main(int argc, char* argv[])
 	if(argc>2) 
 	{index=atoi(argv[2]);}
 	else
-	{dummy=0;}
+	{index=0;}
+
+//if the index tries to access something out of the array 
+	if(index>15)
+	{index=0;}
 
 /*
 -the next thing i noticed was that vallues array and arr2 array were pointing to the same object.
