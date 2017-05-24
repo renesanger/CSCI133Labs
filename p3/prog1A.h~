@@ -133,4 +133,7 @@ class Sentence
 
 };
 
-
+vector<Noun> nounvect;
+vector<Adjective> adjvect;
+vector<Verb> verbvect;
+vector<Pronoun> pronounvect;
