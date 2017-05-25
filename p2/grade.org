@@ -1,0 +1,14 @@
+| Category          | Score | Notes |
+|-------------------+-------+-------|
+| Correctness  (65) |    55 |       |
+|-------------------+-------+-------|
+| structure (10)    |    10 |       |
+| code doc  (10)    |    10 |       |
+| Doc       (15)    |    15 |       |
+| misc              |       |       |
+|-------------------+-------+-------|
+| Total             |    90 |       |
+#+TBLFM: @>$2=vsum(@2..@-1)
+
+* Notes
+- program periodically segfaults
